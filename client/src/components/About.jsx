@@ -1,0 +1,10 @@
+import React from 'react'
+
+export default function About() {
+    return (
+        <div className = "container">
+            <h1 className="text-center">About</h1>
+            <p className="my-3">This App is designed by <strong>Aakash Garg</strong>. This Todo App containes Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minima perspiciatis voluptas ab laudantium deserunt id maiores beatae distinctio a ducimus, temporibus blanditiis est quo totam sint modi nostrum aliquam delectus. Necessitatibus, sint repellat ex doloremque amet libero quod accusantium at explicabo tenetur incidunt laudantium consequatur dignissimos animi temporibus dolorum deserunt quibusdam cumque sapiente fugiat. Libero distinctio voluptas saepe officiis exercitationem. Autem itaque, tenetur magni ut omnis voluptatem libero maiores assumenda nisi consectetur! Incidunt id cupiditate omnis aspernatur ipsa, ab pariatur ullam similique repellendus voluptate totam nemo consequuntur dolor aut eaque possimus dolorum qui hic. Quasi pariatur architecto id nisi reiciendis suscipit impedit neque voluptatum, explicabo maxime excepturi quo. Cumque pariatur corrupti tempore vitae iure possimus modi magni. Quas inventore laborum, excepturi est aliquam, ut eum sequi odio alias unde placeat. Porro mollitia, esse deserunt vitae, consectetur perspiciatis, molestiae dignissimos velit repellendus quo obcaecati libero unde nihil dolores sint quibusdam laudantium pariatur dolore repudiandae. Nihil quaerat placeat asperiores modi ipsa quas error optio? Magni veniam necessitatibus laborum quasi eveniet recusandae sit maiores excepturi voluptas et, saepe labore nihil veritatis numquam voluptatum quos. Nostrum quibusdam optio numquam ipsa blanditiis illum nam aliquid ipsam voluptate non placeat, asperiores odit ipsum id quia veniam doloremque modi debitis eos facere aliquam nemo? Adipisci qui quisquam eos excepturi et recusandae nisi doloribus, tempore est laborum, dolorum ut a pariatur ex commodi nihil? Quasi tenetur, excepturi commodi minus, libero obcaecati nihil sint nisi rerum laudantium, ex quia illo earum?</p>
+        </div>
+    )
+}

@@ -6,23 +6,36 @@ import Todo from "./components/Todo";
 import Footer from "./components/Footer";
 import Addtodos from "./components/Addtodo";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Edittodo from "./components/Edittodo";
+import axios from "axios";
 
 function App() {
-  const onDelete = () => {
-    console.log("Working!!");
-  };
+  const Itodo = [];
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/todo")
+      .then((res) => {
+        setTodo(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
+
+  const [todo, setTodo] = useState(Itodo);
 
   const addTodo = (title, desc, time, date) => {
-    let sno;
+    let id;
 
     if (todo.length === 0) {
-      sno = 0;
+      id = 0;
     } else {
-      sno = todo[todo.length - 1].sno + 1;
+      id = todo[todo.length - 1].id + 1;
     }
-    console.log(sno + " " + title + " " + desc + " " + time + " " + date);
+
     const newTodo = {
-      sno: sno,
+      id: id,
       title: title,
       desc: desc,
       time: time,
@@ -33,30 +46,49 @@ function App() {
     setTodo([...todo, newTodo]);
   };
 
-  const activetodos = (index) => {
-    todo[index].active = !todo[index].active;
+  const editTodo = (title, desc, time, date, todoId) => {
+    console.log(title, todoId);
+
+    /*
+    
+    setTodo(todo.map((todo) =>{
+      if(todo.id === todoId){
+        todo.active =!todo.active
+      }
+      return {...todo, active:false}
+    }))
+
+    */
   };
 
-  const Itodo = [
-    {
-      active: true,
-      date: "2021-06-07",
-      desc: "Have completed the three-course of Simplilearn",
-      sno: 1,
-      time: "08:00",
-      title: "Simplilearn",
-    },
-    {
-      active: false,
-      date: "2021-06-07",
-      desc: "Have completed the three-course of Simplilearn",
-      sno: 2,
-      time: "08:00",
-      title: "Simplilearn",
-    },
-  ];
+  const onDelete = (_todo) => {
+    if (_todo === undefined) {
+      alert("Something went wrong");
+    } else {
+      setTodo(
+        todo.filter((e) => {
+          return e !== _todo;
+        })
+      );
+    }
+  };
 
-  const [todo, setTodo] = useState(Itodo);
+  const activetodos = (id) => {
+    console.log(todo[id]);
+
+    todo[id].active = !todo[id].active;
+
+    console.log(todo[id]);
+
+    axios
+      .put(`http://localhost:3000/todo/${id}`, todo[id].active)
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
 
   return (
     <div className="App">
@@ -66,11 +98,19 @@ function App() {
           <Route path="/about">
             <About />
           </Route>
+          <Route path="/edit">
+            <Edittodo addTodo={addTodo} onDelete={onDelete} todo={todo} />
+          </Route>
           <Route path="/add">
             <Addtodos addTodo={addTodo} onDelete={onDelete} todo={todo} />
           </Route>
           <Route path="/">
-            <Todo todo={todo} onDelete={onDelete} active={activetodos} />
+            <Todo
+              todo={todo}
+              onDelete={onDelete}
+              active={activetodos}
+              onEdit={editTodo}
+            />
           </Route>
         </Switch>
         <Footer></Footer>

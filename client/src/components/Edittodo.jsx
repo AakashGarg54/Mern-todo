@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import { useHistory } from "react-router-dom";
 
-function Addtodos(props) {
 
+function Edittodo(props) {
+
+    
   let history = useHistory();
 
   const [Title, setTitle] = useState(window.$name === undefined ? "" : window.$name.title)
@@ -26,9 +28,10 @@ function Addtodos(props) {
     history.push("/");
   }
 
+
   return (
     <div className="container my-4">
-      <h3>Add Todos</h3>
+      <h3>Edit Todos</h3>
       <form onSubmit={submit}>
         <div className="mb-3">
           <label htmlFor="title" className="form-label">Title</label>
@@ -55,4 +58,4 @@ function Addtodos(props) {
   )
 }
 
-export default Addtodos
+export default Edittodo

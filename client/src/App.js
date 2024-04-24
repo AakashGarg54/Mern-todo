@@ -7,87 +7,60 @@ import Footer from "./components/Footer";
 import Addtodos from "./components/Addtodo";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Edittodo from "./components/Edittodo";
-import axios from "axios";
+import api from "./API/API";
 
 function App() {
-  const Itodo = [];
+  const [todo, setTodo] = useState([]);
+
+  const getData = async () => {
+    const response = await api.get("/todo");
+    return response.data;
+  };
 
   useEffect(() => {
-    axios
-      .get("http://localhost:3000/todo")
-      .then((res) => {
-        setTodo(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  });
-
-  const [todo, setTodo] = useState(Itodo);
-
-  const addTodo = (title, desc, time, date) => {
-    let id;
-
-    if (todo.length === 0) {
-      id = 0;
-    } else {
-      id = todo[todo.length - 1].id + 1;
-    }
-
-    const newTodo = {
-      id: id,
-      title: title,
-      desc: desc,
-      time: time,
-      date: date,
-      active: true,
+    const getallTodos = async () => {
+      const response = await getData();
+      setTodo(response);
     };
 
-    setTodo([...todo, newTodo]);
+    getallTodos();
+  }, [2]);
+
+  const addTodo = async (newTodo) => {
+    const newTODO = JSON.stringify(newTodo);
+    const response = await api.post("/todo", newTODO);
+    setTodo([...todo, response.data]);
   };
 
-  const editTodo = (title, desc, time, date, todoId) => {
-    console.log(title, todoId);
-
-    /*
-    
-    setTodo(todo.map((todo) =>{
-      if(todo.id === todoId){
-        todo.active =!todo.active
-      }
-      return {...todo, active:false}
-    }))
-
-    */
+  const editTodo = async (id, newTodo) => {
+    const response = await api.put(`/todo/${id}`, newTodo);
+    setTodo(await getData());
   };
 
-  const onDelete = (_todo) => {
-    if (_todo === undefined) {
+  const onDelete = async (id) => {
+    if (id === undefined) {
       alert("Something went wrong");
     } else {
+      const response = await api.delete(`/todo/${id}`);
       setTodo(
         todo.filter((e) => {
-          return e !== _todo;
+          return e.id !== id;
         })
       );
     }
   };
 
-  const activetodos = (id) => {
-    console.log(todo[id]);
+  const activetodos = async (id, active) => {
+    const newTODO = todo.map((e) => {
+      if (e.id === id) {
+        return { ...e, active: active };
+      } else {
+        return e;
+      }
+    });
 
-    todo[id].active = !todo[id].active;
-
-    console.log(todo[id]);
-
-    axios
-      .put(`http://localhost:3000/todo/${id}`, todo[id].active)
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    const response = await api.put(`/todo/${id}`, newTODO[id - 1]);
+    setTodo(await getData());
   };
 
   return (
@@ -98,8 +71,8 @@ function App() {
           <Route path="/about">
             <About />
           </Route>
-          <Route path="/edit">
-            <Edittodo addTodo={addTodo} onDelete={onDelete} todo={todo} />
+          <Route path="/edit/:id">
+            <Edittodo edit={editTodo} onDelete={onDelete} todo={todo} />
           </Route>
           <Route path="/add">
             <Addtodos addTodo={addTodo} onDelete={onDelete} todo={todo} />

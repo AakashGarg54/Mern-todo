@@ -16,10 +16,19 @@ function Addtodos(props) {
       alert("Title & Description cannot be empty")
     }
     else {
-      props.addTodo(Title, Desc, Time, Date)
+      
+        const newTodo = {
+        id: (props.todo.length+1).toString(),
+        title: Title,
+        desc: Desc,
+        time: Time,
+        date: Date,
+        active: true,
+      };
+      props.addTodo(newTodo);
     }
 
-    setTitle("")
+    setTitle("") 
     setDesc("")
     setTime("")
     setDate("")

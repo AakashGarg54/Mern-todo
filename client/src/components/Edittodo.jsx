@@ -1,16 +1,17 @@
 import React, { useState } from 'react'
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
 
 function Edittodo(props) {
 
     
   let history = useHistory();
+  const idPara = useParams().id-1;
 
-  const [Title, setTitle] = useState(window.$name === undefined ? "" : window.$name.title)
-  const [Desc, setDesc] = useState(window.$name === undefined ? "" : window.$name.desc)
-  const [Time, setTime] = useState(window.$name === undefined ? "" : window.$name.time)
-  const [Date, setDate] = useState(window.$name === undefined ? "" : window.$name.date)
+  const [Title, setTitle] = useState(props.todo[idPara].title)
+  const [Desc, setDesc] = useState(props.todo[idPara].desc)
+  const [Time, setTime] = useState(props.todo[idPara].time)
+  const [Date, setDate] = useState(props.todo[idPara].date)
 
   const submit = (e) =>{
     e.preventDefault()
@@ -18,7 +19,15 @@ function Edittodo(props) {
       alert("Title & Description cannot be empty")
     }
     else {
-      props.addTodo(Title, Desc, Time, Date)
+      const newTodo = {
+        id: props.todo[idPara].id,
+        title: Title,
+        desc: Desc,
+        time: Time,
+        date: Date,
+        active: true,
+      };
+      props.edit(props.todo[idPara].id, newTodo);
     }
 
     setTitle("")

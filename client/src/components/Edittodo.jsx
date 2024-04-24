@@ -4,16 +4,16 @@ import { useHistory, useParams } from "react-router-dom";
 
 function Edittodo(props) {
 
-    
+
   let history = useHistory();
-  const idPara = useParams().id-1;
+  const idPara = useParams().id - 1;
 
   const [Title, setTitle] = useState(props.todo[idPara].title)
   const [Desc, setDesc] = useState(props.todo[idPara].desc)
   const [Time, setTime] = useState(props.todo[idPara].time)
   const [Date, setDate] = useState(props.todo[idPara].date)
 
-  const submit = (e) =>{
+  const submit = (e) => {
     e.preventDefault()
     if (!Title || !Desc) {
       alert("Title & Description cannot be empty")
@@ -60,7 +60,7 @@ function Edittodo(props) {
           <input type="date" className="form-control" id="date" value={Date} onChange={(e) => setDate(e.target.value)} placeholder="Enter your todos date " />
         </div>
         <button type="submit" className="btn btn-primary">
-          Add
+          Edit
         </button>
       </form>
     </div>

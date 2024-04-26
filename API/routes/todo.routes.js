@@ -3,11 +3,11 @@ import { add, del, edit, list } from "../controllers/todo.controllers.js";
 
 const router = express.Router();
 
-router.get("/add", add);
+router.post("/add", add);
 
-router.get("/edit", edit);
+router.put("/edit", edit);
 
-router.get("/delete", del);
+router.delete("/delete", del);
 
 router.get("/list", list);
 

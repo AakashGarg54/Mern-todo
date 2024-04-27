@@ -3,7 +3,8 @@ import mongoose from "mongoose";
 const todoSchema = new mongoose.Schema({
   title: { type: String, required: true },
   desc: { type: String, required: true },
-  dateandtime: { type: Date, required: true },
+  date: { type: String, required: true },
+  time: { type: String, required: true },
   active: { type: Boolean, required: true },
 });
 

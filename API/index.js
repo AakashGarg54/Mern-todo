@@ -5,20 +5,23 @@ import dotenv from "dotenv";
 
 import router from "./routes/todo.routes.js";
 
-// import Todo from "./models/todo.models";
-
+const app = express();
+app.use(express.json());
 dotenv.config();
 
 mongoose
-  .connect(process.env.MONGODB_URI)
+  .connect(process.env.MONGODB)
   .then(() => {
     console.log("DB is connected");
   })
   .catch((err) => console.error(err));
 
-const app = express();
 app.listen(3000, () => {
   console.log("Server is running on port : " + 3000);
+});
+
+app.get("/", (req, res) => {
+  res.send("Hello World");
 });
 
 app.use("/api", router);

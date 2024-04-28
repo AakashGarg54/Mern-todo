@@ -13,8 +13,8 @@ function App() {
   const [todo, setTodo] = useState([]);
 
   const getData = async () => {
-    const response = await api.get("/todo");
-    return response.data;
+    const response = await api.get("/api/list");
+    return response.data.todo;
   };
 
   useEffect(() => {
@@ -27,24 +27,23 @@ function App() {
   }, [2]);
 
   const addTodo = async (newTodo) => {
-    const newTODO = JSON.stringify(newTodo);
-    const response = await api.post("/todo", newTODO);
+    const response = await api.post("/api/add", newTodo);
     setTodo([...todo, response.data]);
   };
 
   const editTodo = async (id, newTodo) => {
-    const response = await api.put(`/todo/${id}`, newTodo);
+    await api.put(`/api/edit/${id}`, newTodo);
     setTodo(await getData());
   };
 
-  const onDelete = async (id) => {
-    if (id === undefined) {
+  const onDelete = async (_id) => {
+    if (_id === undefined) {
       alert("Something went wrong");
     } else {
-      const response = await api.delete(`/todo/${id}`);
+      await api.delete(`/api/delete/${_id}`);
       setTodo(
         todo.filter((e) => {
-          return e.id !== id;
+          return e._id !== _id;
         })
       );
     }
@@ -59,7 +58,7 @@ function App() {
       }
     });
 
-    const response = await api.put(`/todo/${id}`, newTODO[id - 1]);
+    await api.put(`/api/active/${id}`, { active: active });
     setTodo(await getData());
   };
 
@@ -71,8 +70,8 @@ function App() {
           <Route path="/about">
             <About />
           </Route>
-          <Route path="/edit/:id">
-            <Edittodo edit={editTodo} onDelete={onDelete} todo={todo} />
+          <Route path="/edit/:_id">
+            <Edittodo edit={editTodo} todo={todo} />
           </Route>
           <Route path="/add">
             <Addtodos addTodo={addTodo} onDelete={onDelete} todo={todo} />

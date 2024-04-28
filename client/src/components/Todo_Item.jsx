@@ -17,26 +17,26 @@ function Todos_item(props) {
 
                 {props.todoitem.active === true ?
                     <>
-                        < ><h3 className="my-3">{props.todoitem.id}. {props.todoitem.title}</h3></>
+                        < ><h3 className="my-3">{props.todoitem.title}</h3></>
                         <p>{props.todoitem.desc}</p>
                         <p>On {props.todoitem.date} time taken {props.todoitem.time}</p>
                     </>
                     :
                     <>
-                        < ><del><h3 className="my-3">{props.todoitem.id}. {props.todoitem.title}</h3></del></>
+                        < ><del><h3 className="my-3">{props.todoitem.title}</h3></del></>
                         <p><del>{props.todoitem.desc}</del></p>
                         <p><del>On {props.todoitem.date} time taken {props.todoitem.time}</del></p>
                     </>
 
                 }
                 <div className="mb-3 form-check">
-                    <input type="checkbox" className="form-check-input" id={props.todoitem.id} checked={active} onChange={(e) => { setactive(e.target.checked); props.active(props.todoitem.id, active); }} />
+                    <input type="checkbox" className="form-check-input" id={props.todoitem.id} checked={active} onChange={(e) => { setactive(e.target.checked); props.active(props.todoitem._id, active); }} />
                     <label className="form-check-label" htmlFor="exampleCheck1">Done</label>
                 </div>
-                <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Please make the todo active to active the button">
-                    <button className="btn btn-sm btn-primary " data-bs-dismiss="modal" disabled={active} onClick={() => { history.push(`/edit/${props.todoitem.id}`); }} >Edit</button>
+                <span className="d-inline-block" tabIndex="0" data-toggle="tooltip" title="Please make the todo active to active the button">
+                    <button className="btn btn-sm btn-primary " data-bs-dismiss="modal" disabled={active} onClick={() => { history.push(`/edit/${props.todoitem._id}`); }} >Edit</button>
                 </span>
-                <button className="btn btn-sm btn-danger mx-3" data-bs-dismiss="modal" onClick={() => { props.onDelete(props.todoitem.id) }}>Delete</button>
+                <button className="btn btn-sm btn-danger mx-3" data-bs-dismiss="modal" onClick={() => { props.onDelete(props.todoitem._id) }}>Delete</button>
             </div>
             <hr />
         </>

@@ -1,13 +1,21 @@
 import express from "express";
-import { add, del, edit, list } from "../controllers/todo.controllers.js";
+import {
+  active,
+  add,
+  del,
+  edit,
+  list,
+} from "../controllers/todo.controllers.js";
 
 const router = express.Router();
 
 router.post("/add", add);
 
-router.put("/edit", edit);
+router.put("/edit/:_id", edit);
 
-router.delete("/delete", del);
+router.put("/active/:_id", active);
+
+router.delete("/delete/:_id", del);
 
 router.get("/list", list);
 

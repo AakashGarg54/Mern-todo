@@ -2,12 +2,15 @@ import express from "express";
 
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import cors from "cors";
 
 import router from "./routes/todo.routes.js";
 
 const app = express();
 app.use(express.json());
 dotenv.config();
+
+app.use(cors());
 
 mongoose
   .connect(process.env.MONGODB)

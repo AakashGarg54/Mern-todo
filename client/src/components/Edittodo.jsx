@@ -6,12 +6,14 @@ function Edittodo(props) {
 
 
   let history = useHistory();
-  const idPara = useParams().id - 1;
+  const idPara = useParams()._id;
 
-  const [Title, setTitle] = useState(props.todo[idPara].title)
-  const [Desc, setDesc] = useState(props.todo[idPara].desc)
-  const [Time, setTime] = useState(props.todo[idPara].time)
-  const [Date, setDate] = useState(props.todo[idPara].date)
+  const todo = props.todo.find((e) => e._id === idPara)
+
+  const [Title, setTitle] = useState(todo.title)
+  const [Desc, setDesc] = useState(todo.desc)
+  const [Time, setTime] = useState(todo.time)
+  const [Date, setDate] = useState(todo.date)
 
   const submit = (e) => {
     e.preventDefault()
@@ -20,14 +22,13 @@ function Edittodo(props) {
     }
     else {
       const newTodo = {
-        id: props.todo[idPara].id,
         title: Title,
         desc: Desc,
         time: Time,
         date: Date,
         active: true,
       };
-      props.edit(props.todo[idPara].id, newTodo);
+      props.edit(idPara, newTodo);
     }
 
     setTitle("")

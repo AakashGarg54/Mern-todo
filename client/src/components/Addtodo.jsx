@@ -10,15 +10,14 @@ function Addtodos(props) {
   const [Time, setTime] = useState(window.$name === undefined ? "" : window.$name.time)
   const [Date, setDate] = useState(window.$name === undefined ? "" : window.$name.date)
 
-  const submit = (e) =>{
+  const submit = (e) => {
     e.preventDefault()
     if (!Title || !Desc) {
       alert("Title & Description cannot be empty")
     }
     else {
-      
-        const newTodo = {
-        id: (props.todo.length+1).toString(),
+
+      const newTodo = {
         title: Title,
         desc: Desc,
         time: Time,
@@ -28,7 +27,7 @@ function Addtodos(props) {
       props.addTodo(newTodo);
     }
 
-    setTitle("") 
+    setTitle("")
     setDesc("")
     setTime("")
     setDate("")

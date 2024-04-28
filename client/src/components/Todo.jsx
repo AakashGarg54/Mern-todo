@@ -4,7 +4,7 @@ import Todo_Item from "./Todo_Item";
 function Todo(props) {
 
     return (
-        <div className="container">
+        <div className="container" style={{ minHeight: "77.8vh" }}>
             <h2 className="my-3 text-center">Todo List</h2>
             {props.todo.length === 0 ?
                 <div className="card">
@@ -14,7 +14,8 @@ function Todo(props) {
                 </div>
                 : props.todo.map((i) => {
                     return <Todo_Item length={props.todo.length} key={i._id} todo={props.todo} todoitem={i} id={i._id} onDelete={props.onDelete} active={props.active} onEdit={props.onEdit} />
-                })}
+                })
+            }
         </div>
     )
 }

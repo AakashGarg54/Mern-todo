@@ -50,13 +50,6 @@ function App() {
   };
 
   const activetodos = async (id, active) => {
-    const newTODO = todo.map((e) => {
-      if (e.id === id) {
-        return { ...e, active: active };
-      } else {
-        return e;
-      }
-    });
 
     await api.put(`/api/active/${id}`, { active: active });
     setTodo(await getData());

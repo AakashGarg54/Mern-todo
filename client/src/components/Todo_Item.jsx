@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import Edittodo from './Edittodo'
 import { useHistory } from "react-router-dom";
 
 window.$index = -1

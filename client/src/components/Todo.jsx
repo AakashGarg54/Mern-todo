@@ -1,5 +1,5 @@
 import React from 'react'
-import Todo_Item from "./Todo_Item";
+import TodoItem from "./TodoItem";
 
 function Todo(props) {
 
@@ -13,7 +13,7 @@ function Todo(props) {
                     </div>
                 </div>
                 : props.todo.map((i) => {
-                    return <Todo_Item length={props.todo.length} key={i._id} todo={props.todo} todoitem={i} id={i._id} onDelete={props.onDelete} active={props.active} onEdit={props.onEdit} />
+                    return <TodoItem length={props.todo.length} key={i._id} todo={props.todo} todoitem={i} id={i._id} onDelete={props.onDelete} active={props.active} onEdit={props.onEdit} />
                 })
             }
         </div>

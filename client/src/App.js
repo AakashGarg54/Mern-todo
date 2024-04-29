@@ -32,7 +32,7 @@ function App() {
     };
 
     getallTodos();
-  }, [2]);
+  });
 
   const addTodo = async (newTodo) => {
     try {
@@ -48,7 +48,7 @@ function App() {
       await api.put(`/api/edit/${id}`, newTodo);
       setTodo(await getData());
     } catch (error) {
-      alert (error)
+      alert(error);
     }
   };
 

@@ -3,6 +3,7 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
+import path from "path";
 
 import router from "./routes/todo.routes.js";
 
@@ -11,6 +12,8 @@ app.use(express.json());
 dotenv.config();
 
 app.use(cors());
+
+const __dirname = path.resolve();
 
 mongoose
   .connect(process.env.MONGODB)
@@ -23,8 +26,10 @@ app.listen(3306, () => {
   console.log("Server is running on port : " + 3000);
 });
 
-app.get("/", (req, res) => {
-  res.send("Hello World");
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "./client", "build", "index.html"));
 });
 
 app.use("/api", router);
+
+app.use(express.static(path.join(__dirname, "./client/build")));

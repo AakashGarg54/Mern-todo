@@ -13,27 +13,43 @@ function App() {
   const [todo, setTodo] = useState([]);
 
   const getData = async () => {
-    const response = await api.get("/api/list");
-    return response.data.todo;
+    try {
+      const response = await api.get("/api/list");
+      return response.data.todo;
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
     const getallTodos = async () => {
-      const response = await getData();
-      setTodo(response);
+      try {
+        const response = await getData();
+        setTodo(response);
+      } catch (error) {
+        console.log(error);
+      }
     };
 
     getallTodos();
   }, [2]);
 
   const addTodo = async (newTodo) => {
-    const response = await api.post("/api/add", newTodo);
-    setTodo([...todo, response.data]);
+    try {
+      const response = await api.post("/api/add", newTodo);
+      setTodo([...todo, response.data]);
+    } catch (error) {
+      alert(error);
+    }
   };
 
   const editTodo = async (id, newTodo) => {
-    await api.put(`/api/edit/${id}`, newTodo);
-    setTodo(await getData());
+    try {
+      await api.put(`/api/edit/${id}`, newTodo);
+      setTodo(await getData());
+    } catch (error) {
+      alert (error)
+    }
   };
 
   const onDelete = async (_id) => {
@@ -50,7 +66,6 @@ function App() {
   };
 
   const activetodos = async (id, active) => {
-
     await api.put(`/api/active/${id}`, { active: active });
     setTodo(await getData());
   };
@@ -58,7 +73,7 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Header title="My TODO List" searchBar={false} />
+        <Header title="My TODO List" searchBar={true} />
         <Switch>
           <Route path="/about">
             <About />

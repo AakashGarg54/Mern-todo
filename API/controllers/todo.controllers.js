@@ -36,7 +36,11 @@ export const edit = async (req, res) => {
   doc.date = req.body.date;
   doc.active = req.body.active;
 
-  await doc.save();
+  try {
+    await doc.save();
+  } catch (error) {
+    res.status(500).json(error);
+  }
 
   res.json(doc);
 };

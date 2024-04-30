@@ -13,15 +13,14 @@ dotenv.config();
 
 app.use(cors());
 
-
 mongoose
-.connect(process.env.MONGODB)
+  .connect(process.env.MONGODB)
   .then(() => {
     console.log("DB is connected");
   })
   .catch((err) => console.error(err));
 
-  const __dirname = path.resolve();
+const __dirname = path.resolve();
 
 app.listen(3306, () => {
   console.log("Server is running on port : " + 3306);

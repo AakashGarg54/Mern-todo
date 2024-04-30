@@ -1,11 +1,11 @@
-import express from "express";
+const express = require("express");
 
-import mongoose from "mongoose";
-import dotenv from "dotenv";
-import cors from "cors";
-import path from "path";
+const mongoose = require("mongoose");
+const dotenv = require("dotenv");
+const cors = require("cors");
+const path = require("path");
 
-import router from "./routes/todo.routes.js";
+const router = require("./routes/todo.routes.js");
 
 const app = express();
 app.use(express.json());
@@ -20,7 +20,6 @@ mongoose
   })
   .catch((err) => console.error(err));
 
-const __dirname = path.resolve();
 
 app.listen(3306, () => {
   console.log("Server is running on port : " + 3306);

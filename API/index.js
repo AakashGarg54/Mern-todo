@@ -13,17 +13,25 @@ dotenv.config();
 
 app.use(cors());
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> cc2b372e04d85cec4a78ed63759af2615df7b903
 mongoose
-  .connect(process.env.MONGODB)
+.connect(process.env.MONGODB)
   .then(() => {
     console.log("DB is connected");
   })
   .catch((err) => console.error(err));
 
+<<<<<<< HEAD
 const __dirname = path.resolve();
+=======
+  const __dirname = path.resolve();
+>>>>>>> cc2b372e04d85cec4a78ed63759af2615df7b903
 
 app.listen(3306, () => {
-  console.log("Server is running on port : " + 3000);
+  console.log("Server is running on port : " + 3306);
 });
 
 app.use("/api", router);

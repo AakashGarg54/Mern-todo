@@ -1,6 +1,6 @@
-const Todo = require("../models/todo.models.js");
+import Todo from "../models/todo.models.js";
 
-exports.add = async (req, res) => {
+export const add = async (req, res) => {
   // res.json(req.body);
   const { title, desc, date, time, active } = req.body;
 
@@ -20,7 +20,7 @@ exports.add = async (req, res) => {
   }
 };
 
-exports.active = async (req, res) => {
+export const active = async (req, res) => {
   const doc = await Todo.findOne(req.params);
   doc.active = req.body.active;
   await doc.save();
@@ -28,7 +28,7 @@ exports.active = async (req, res) => {
   res.json(doc);
 };
 
-exports.edit = async (req, res) => {
+export const edit = async (req, res) => {
   const doc = await Todo.findOne(req.params);
   doc.title = req.body.title;
   doc.desc = req.body.desc;
@@ -45,12 +45,12 @@ exports.edit = async (req, res) => {
   res.json(doc);
 };
 
-exports.del = async (req, res) => {
+export const del = async (req, res) => {
   const query = await Todo.deleteOne(req.params);
   res.send(query);
 };
 
-exports.list = async (req, res) => {
+export const list = async (req, res) => {
   await Todo.find().then((todo) => {
     res.status(200).json({
       todo,

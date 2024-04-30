@@ -1,12 +1,11 @@
-const express = require("express");
-
-const {
+import express from "express";
+import {
   active,
   add,
   del,
   edit,
   list,
-} = require("../controllers/todo.controllers.js");
+} from "../controllers/todo.controllers.js";
 
 const router = express.Router();
 
@@ -20,4 +19,4 @@ router.delete("/delete/:_id", del);
 
 router.get("/list", list);
 
-exports.router = router;
+export default router;

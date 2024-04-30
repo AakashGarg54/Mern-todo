@@ -1,4 +1,3 @@
-console.log("hYEYEYEYE");
 import express from "express";
 
 import mongoose from "mongoose";

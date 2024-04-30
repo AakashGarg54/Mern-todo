@@ -23,7 +23,7 @@ mongoose
 const __dirname = path.resolve();
 
 app.listen(3306, () => {
-  console.log("Server is running on port : " + 3000);
+  console.log("Server is running on port : " + 3306);
 });
 
 app.use("/api", router);

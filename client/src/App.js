@@ -15,6 +15,7 @@ function App() {
   const getData = async () => {
     try {
       const response = await api.get("/api/list");
+      console.log(response);
       return response.data.todo;
     } catch (error) {
       console.log(error);
@@ -25,6 +26,8 @@ function App() {
     const getallTodos = async () => {
       try {
         const response = await getData();
+        console.log(response);
+
         setTodo(response);
       } catch (error) {
         console.log(error);
@@ -37,6 +40,8 @@ function App() {
   const addTodo = async (newTodo) => {
     try {
       const response = await api.post("/api/add", newTodo);
+      console.log(response);
+
       setTodo([...todo, response.data]);
     } catch (error) {
       alert(error);

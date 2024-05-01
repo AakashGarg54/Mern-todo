@@ -1,13 +1,19 @@
 // import Header from "./Components/Header";
 import React, { useState, useEffect } from "react";
-import Header from "./components/Header";
-import About from "./components/About";
-import Todo from "./components/Todo";
-import Footer from "./components/Footer";
-import Addtodos from "./components/Addtodo";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Edittodo from "./components/Edittodo";
+
+import Header from "./components/todos/Header";
+import About from "./components/todos/About";
+import Todo from "./components/todos/Todo";
+import Footer from "./components/todos/Footer";
+import Addtodos from "./components/todos/Addtodo";
+import Edittodo from "./components/todos/Edittodo";
+
+import Login from "./components/login/Login";
+
 import api from "./API/API";
+import ForgetPassword from "./components/login/ForgetPassword";
+import Signup from "./components/login/Signup";
 
 function App() {
   const [todo, setTodo] = useState([]);
@@ -72,9 +78,18 @@ function App() {
 
   return (
     <div className="App">
-      <Router>
+      <Router path="/hehe">
         <Header title="My TODO List" searchBar={true} />
         <Switch>
+          <Route path="/login">
+            <Login />
+          </Route>
+          <Route path="/forgetPass">
+            <ForgetPassword />
+          </Route>
+          <Route path="/signup">
+            <Signup />
+          </Route>
           <Route path="/about">
             <About />
           </Route>

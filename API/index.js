@@ -5,7 +5,8 @@ import dotenv from "dotenv";
 import cors from "cors";
 import path from "path";
 
-import router from "./routes/todo.routes.js";
+import todo from "./routes/todo.routes.js";
+import auth from "./routes/auth.routes.js";
 
 const app = express();
 app.use(express.json());
@@ -23,13 +24,15 @@ mongoose
 const __dirname = path.resolve();
 
 app.listen(3306, () => {
-  console.log("Server is running on port : " + 3000);
+  console.log("Server is running on port : " + 3306);
 });
 
-app.use("/api", router);
+app.use("/api/todo", todo);
+app.use("/api/auth", auth);
 
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "./client", "build", "index.html"));
+  // res.sendFile(path.join(__dirname, "./client", "build", "index.html"));
+  
 });
 
-app.use(express.static(path.join(__dirname, "./client/build")));
+// app.use(express.static(path.join(__dirname, "./client/build")));

@@ -9,9 +9,9 @@ import Footer from "./components/todos/Footer";
 import Addtodos from "./components/todos/Addtodo";
 import Edittodo from "./components/todos/Edittodo";
 
-import Login from "./components/login/Login";
-
 import api from "./API/API";
+
+import Login from "./components/login/Login";
 import ForgetPassword from "./components/login/ForgetPassword";
 import Signup from "./components/login/Signup";
 
@@ -20,7 +20,8 @@ function App() {
 
   const getData = async () => {
     try {
-      const response = await api.get("/api/list");
+      const response = await api.get("/api/todo/list");
+      console.log(response.data)
       return response.data.todo;
     } catch (error) {
       console.log(error);
@@ -32,17 +33,18 @@ function App() {
       try {
         const response = await getData();
         setTodo(response);
+        console.log(response);
       } catch (error) {
         console.log(error);
       }
     };
 
     getallTodos();
-  });
+  }, [1]);
 
   const addTodo = async (newTodo) => {
     try {
-      const response = await api.post("/api/add", newTodo);
+      const response = await api.post("/api/todo/add", newTodo);
       setTodo([...todo, response.data]);
     } catch (error) {
       alert(error);
@@ -51,7 +53,7 @@ function App() {
 
   const editTodo = async (id, newTodo) => {
     try {
-      await api.put(`/api/edit/${id}`, newTodo);
+      await api.put(`/api/todo/edit/${id}`, newTodo);
       setTodo(await getData());
     } catch (error) {
       alert(error);
@@ -62,7 +64,7 @@ function App() {
     if (_id === undefined) {
       alert("Something went wrong");
     } else {
-      await api.delete(`/api/delete/${_id}`);
+      await api.delete(`/api/todo/delete/${_id}`);
       setTodo(
         todo.filter((e) => {
           return e._id !== _id;
@@ -72,7 +74,7 @@ function App() {
   };
 
   const activetodos = async (id, active) => {
-    await api.put(`/api/active/${id}`, { active: active });
+    await api.put(`/api/todo/active/${id}`, { active: active });
     setTodo(await getData());
   };
 

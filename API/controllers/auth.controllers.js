@@ -1,4 +1,4 @@
 export const signup = async (req, res) => {
-  console.log("test");
+  res.send("Signup")
 };
 

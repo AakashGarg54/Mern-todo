@@ -16,7 +16,7 @@ function Edittodo(props) {
   const [Date, setDate] = useState(todo.date)
 
   const submit = (e) => {
-    e.preventDefault()
+    e.preventDefault() 
     if (!Title || !Desc) {
       alert("Title & Description cannot be empty")
     }
@@ -35,7 +35,7 @@ function Edittodo(props) {
     setDesc("")
     setTime("")
     setDate("")
-    history.push("/");
+    history.push("/");  
   }
 
 

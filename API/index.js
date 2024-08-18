@@ -32,6 +32,7 @@ app.use("/api/auth", auth);
 
 app.get("*", (req, res) => {
   // res.sendFile(path.join(__dirname, "./client", "build", "index.html"));
+  res.send("404 Error")
   
 });
 

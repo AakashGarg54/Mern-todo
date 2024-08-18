@@ -2,10 +2,11 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-import Header from "./components/todos/Header";
-import About from "./components/todos/About";
+import Header from "./components/others/Header";
+import Footer from "./components/others/Footer";
+import About from "./components/others/About";
+
 import Todo from "./components/todos/Todo";
-import Footer from "./components/todos/Footer";
 import Addtodos from "./components/todos/Addtodo";
 import Edittodo from "./components/todos/Edittodo";
 
@@ -81,7 +82,7 @@ function App() {
   return (
     <div className="App">
       <Router path="/hehe">
-        <Header title="My TODO List" searchBar={true} />
+        <Header title="My TODO List" searchBar={false} />
         <Switch>
           <Route path="/login">
             <Login />
